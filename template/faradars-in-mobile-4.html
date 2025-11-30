@@ -1,0 +1,1305 @@
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>faradars10</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'css/faradars_in_mobile4.css' %}" rel="stylesheet" type="text/css">
+
+
+
+        <style>
+ 
+        </style>
+    </head>
+    <body>
+    <!--بنر تبلیغاتی بالای صفحه-->
+
+        <div class="promo-banner">
+            <span class="close-btn" onclick="closeBanner()">×</span>
+                <span class="promo-text">
+                    🎉 جشنواره بهار آموزشی - تخفیف ۶۸٪ فقط تا پایان زمان باقی‌مانده:
+                <span id="countdown"></span>
+            </span>
+        </div>
+        <!--منو بار توی گوشی-->
+        <div class="display1">
+            <dl class="main-menu-mobile">
+                <dt>
+                  <a href="#">
+                    <i class="fas fa-home"></i>
+                    <br>
+                    <p>خانه</p>
+                  </a>
+                </dt>
+                <dt>
+                  <a href="#">
+                    <i class="fas fa-book"></i>
+                    <br>
+                    <p>اموزش های من</p>
+                  </a>
+                </dt>
+                <dt>
+                  <a href="#">
+                    <i class="fas fa-user"></i>
+                    <br>
+                    <p>پروفایل</p>
+                  </a>
+                </dt>
+            </dl>
+        </div>
+
+        <!--بخش دسته بندی ها و سرچ و دکمه ورود عضویت و ایکون خرید و سرچ در این بخش قرار دارن همگی-->
+        
+
+        <header class="main-header">
+        <!--دکمه ورود و عضویت و ایکون خرید که هردو سمت چپ هدر هستن-->
+            <div class="header-left">
+                <a href="#" class="cart-icon"><i class="fas fa-shopping-cart"></i></a>
+                {% if user.is_authenticated %}
+                <a href="{%url 'p_list'%}" class="login-btn">{{user.username}}</a>
+                {% else %}
+                <a href="{%url 'login'%}" class="login-btn">ورود / عضویت</a>
+                {% endif %}
+            </div>
+            <!--سمته راسته هدر که دکمه و ایکون سرچ و منوی دسته بندی هستش-->
+            <div class="header-right">
+            
+
+              <div class="display2">
+                <p class="daste-bandy">دسته بندی</p>
+
+
+
+                <!-- بک‌گراند خاکستری و منوی باز شونده -->
+                <div class="overlay" id="overlay"></div>
+
+                <div class="menu-panel" id="menuPanel">
+                    <div class="menu-content">
+                        <ul>
+                            <li><a href="#">برنامه نویسی<i class="fas fa-chevron-left"></i></a></li>
+                            <li><a href="#">طراحی گرافیک<i class="fas fa-chevron-left"></i></a></li>
+                            <li><a href="#">ریاضی و آمار<i class="fas fa-chevron-left"></i></a></li>
+                            <li><a href="#">فیزیک و مهندسی<i class="fas fa-chevron-left"></i></a></li>
+                            <li><a href="#">زبان‌های خارجی<i class="fas fa-chevron-left"></i></a></li>
+                            <li><a href="#">طراحی و تحلیل الگوریتم ها<i class="fas fa-chevron-left"></i></a></li>
+                            <li><a href="#">ساختمان داده ها و الگوریتم<i class="fas fa-chevron-left"></i></a></li>
+                            <li><a href="#">مدار های منطقی<i class="fas fa-chevron-left"></i></a></li>
+                            <li><a href="#">معماری کامپیوتر<i class="fas fa-chevron-left"></i></a></li>
+                            <li><a href="#">نظریه زبان ها و ماشین ها<i class="fas fa-chevron-left"></i></a></li>
+                        </ul>
+
+
+                        <div class="menu-1-1">
+                            <ul id="submenu-list"></ul>
+                        </div>
+
+
+                        <span class="close-menu" onclick="closeMenu()">×</span>
+                    </div>
+                </div>
+              </div>
+
+                <a href=""><img src="{% static 'image/image1.svg' %}"></a>
+
+
+                <!--دکمه ی سرچ-->
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="search" placeholder="جستجوی آموزش..." class="search1">
+                    <!--فیلده جستجو هایه پرطرفدار-->
+                <!-- <div class="popular-searches" id="popularSearches">
+                        <p>جستجوهای پرطرفدار</p>
+                        <ul>
+                            <li onclick="fillSearch('پایتون')">پایتون</li>
+                            <li onclick="fillSearch('اکسل')">اکسل</li>
+                            <li onclick="fillSearch('حسابداری')">حسابداری</li>
+                            <li onclick="fillSearch('فتوشاپ')">فتوشاپ</li>
+                            <li onclick="fillSearch('زبان انگلیسی')">زبان انگلیسی</li>
+                        </ul>
+                    </div>
+                    -->
+                </div>
+            
+            </div>        
+        </header>
+    <!--بخشه ابی کمرنگ صفحه و عناصر داخلش-->
+    <div class="body-main">
+        <!--نوشته های سایت-->
+        <div class="text1">
+            <p>با هزاران<span>  آموزش‌</span>کاربردی فرادرس،</p>
+            <p class="text2">همین امروز شروع کن،</p>
+            <p class="text2">یاد بگیر و آینده رو بساز.</p>
+        </div>
+        <!--دومین عکس سایت  (در پوشه فرادرس در دسکتاپ میتونی عکس رو پیدا کنی )-->
+        <img src="{% static 'image/image2.svg' %}" class="image2">
+        <!--دکمه ی سرچه دوم زیره نوشته ها-->
+        <div class="search-container" id="search2">
+            <input type="search" placeholder="به دنبال یادگیری چی هستی؟">
+            <i class="fas fa-search search-icon1"></i>
+            <!--فیلده جستجو هایه پرطرفدار-->
+            <!--
+            <div class="popular-searches" id="popularSearches">
+                <p>جستجوهای پرطرفدار</p>
+                <ul>
+                    <li onclick="fillSearch('پایتون')">پایتون</li>
+                    <li onclick="fillSearch('اکسل')">اکسل</li>
+                    <li onclick="fillSearch('حسابداری')">حسابداری</li>
+                    <li onclick="fillSearch('فتوشاپ')">فتوشاپ</li>
+                    <li onclick="fillSearch('زبان انگلیسی')">زبان انگلیسی</li>
+                </ul>
+            </div>
+            -->
+        </div>
+
+      <div class="box">
+
+        <div class="container1">
+
+          <div class="container2">
+            <i class="fas fa-book"></i> ۱۴,۰۰۰+ عنوان آموزشی
+          </div>
+          <div class="container2">
+            <i class="fas fa-graduation-cap"></i> ۳,۹۰۰,۰۰۰+ دانشجو
+          </div>
+
+        </div>
+        <div class="container1">
+        
+          <div class="container2">
+            <i class="fas fa-book"></i> ۲۹۰ حوزه تخصصی
+          </div>
+          <div class="container2">
+            <i class="fas fa-chalkboard-teacher"></i> ۲,۸۰۰+ مدرس
+          </div>
+      
+        </div>
+
+      </div>
+
+      <div class="t3-t4">
+      	<a href="#" class="text4"><i class="fas fa-chevron-left"></i>همه دسته‌بندی‌ها</a>
+        <p class="text3">موضوعات و دسته‌بندی‌های آموزشی منتخب</p>
+      </div>
+            
+
+            <div class="main-mozo">
+                <div class="mozo-div1">
+                    <div class="mozo-div2">
+                        <div class="size-mozo">
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image10.10.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image10.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>هوش مصنوعی</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div>
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image9.9.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image9.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>ریاضیات</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div>
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image8.8.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image8.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>هنر</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div>
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image7.7.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image7.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>بورس و سهام</p>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+                    <div class="mozo-div2">
+                        <div>
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image6.6.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image6.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>پایتون</p>
+                                </div>
+                                </a>
+                        </div>
+
+                        <div>
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image5.5.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image5.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>مهندسی مکانیک</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div>
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image4.4.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image4.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>امار و داده کاوی</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div>
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image3.3.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image3.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>برنامه نویسی</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="mozo-div1">
+                    <div class="mozo-div2">
+                        <div>
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image11.11.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image11.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>صنایع دستی</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div>
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image12.12.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image12.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>زبان انگلیسی</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div>
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image13.13.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image13.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>مهندسی معماری</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div>
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image14.14.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image14.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>مهندسی عمران</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="mozo-div2">
+                        <div>
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image15.15.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image15.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>طراحی گرافیک</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div>
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image16.16.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image16.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>مهندسی نرم افزار</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div>
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image17.17.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image17.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>مهندسی برق</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div>
+                            <a href="#">
+                                <div class="image-container">
+                                    <img src="{% static 'image/image18.18.png'%}" class="default-image" alt="عکس اصلی">
+                                    <img src="{% static 'image/image18.svg'%}" class="hover-image" alt="عکس هاور">
+                                    <p>اکسل</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+
+
+    
+
+      <div class="amozesh">
+        <div class="main-amozesh">
+          <h2>آموزش‌های پرمخاطب</h2>
+          <br>
+          <div class="tabs">
+              <div class="tab active" onclick="showCategory('all', this)">همه</div>
+              <div class="tab" onclick="showCategory('programming', this)">برنامه‌نویسی</div>
+              <div class="tab" onclick="showCategory('ai', this)">هوش مصنوعی</div>
+              <div class="tab" onclick="showCategory('math', this)">ریاضی</div>
+              <div class="tab" onclick="showCategory('design', this)">گرافیک</div>
+          </div>
+
+          <div class="course-slider-wrapper">
+              <button class="nav-btn nav-left" onclick="scrollSlider(-1)">&#x2039;</button>
+              <div class="course-slider" id="slider">
+                <div class="course-card" data-category="programming">
+                 
+                  <div  class="amozesh-ha">
+                    <a href="#">
+                      <img src="{% static 'image/image19-amozesh-barname.svg'%}">
+                      <h4>آموزش برنامه نویسی C++‎ سی پلاس پلاس + گواهینامه</h4>
+                      <h6>
+                          <i class="fas fa-chalkboard-teacher"></i>
+                          فرشید شیرافکن
+                      </h6>
+                      <h6>
+                        <i class="fa-solid fa-clock"></i>
+                        20 ساعت
+                      </h6>
+                      <br>
+                      <h5>
+                        قیمت : 89000 تومان
+                      </h5>
+                      <span>شگفتی</span>
+                      <del>100000</del>
+                    </a>
+                  </div>
+                  
+                </div>
+
+
+                <div class="course-card" data-category="ai">
+                  
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image21-amozesh-hoosh.svg'%}">
+                            <h4>آموزش مبانی یادگیری عمیق یا Deep Learning + گواهینامه</h4>
+                            <h6>
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                سعید محققی
+                            </h6>
+                            <h6>
+                                <i class="fa-solid fa-clock"></i>
+                                5 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                                قیمت : 89000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>99000</del>
+                        </a>
+                    </div>
+                  
+                </div>
+
+
+                <div class="course-card" data-category="math">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image23-amozesh-riazi.svg'%}">
+                            <h4>آموزش ریاضی عمومی ۱ + مرور و حل تست کنکور کارشناسی ارشد</h4>
+                            <h6>
+                              <i class="fas fa-chalkboard-teacher"></i>
+                              سعید محققی
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              21 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 109000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>110000</del>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="course-card" data-category="design">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image25-amozesh-tarahi.svg'%}">
+                            <h4>آموزش مقدماتی فتوشاپ Photoshop – جامع و کاربردی + گواهینامه</h4>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                              مهدی اشرفی
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              8 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 99000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>100000</del>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="course-card" data-category="design">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image26-amozesh-tarahi.svg'%}">
+                            <h4>آموزش تصویرسازی و طراحی پوستر با هوش مصنوعی Firefly</h4>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                              امیر رضا نیکخواه
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              1 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 99000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>102000</del>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="course-card" data-category="design">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image27-amozesh-tarahi.svg'%}">
+                            <h4>آموزش نرم افزار اسکچ آپ – مدل سازی سه بعدی با SketchUp + گواهینامه</h4>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                              ارمان حسن زاده
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              3 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 69000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>70000</del>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="course-card" data-category="programming">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image20-amozesh-barname.svg'%}">
+                            <h4>آموزش برنامه نویسی پایتون + مثال های عملی در Python + گواهینامه</h4>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                              فرشید شیرافکن
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              13 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 125000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>130000</del>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="course-card" data-category="ai">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image22-amozesh-hoosh.svg'%}">
+                            <h4>آموزش یادگیری ماشین – جامع و با مفاهیم کلیدی</h4>
+                            <br>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                              امیر حسین کیهانی پور
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              21 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 100000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>101000</del>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="course-card" data-category="math">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image24-amozesh-riazi.svg'%}">
+                            <h4>آموزش ریاضی پایه دانشگاهی – جامع و کاربردی</h4>
+                            <br>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                              فرشید شیرافکن
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              15 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 390000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>400000</del>
+                        </a>
+                    </div>
+                </div>
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="amozesh">
+        <div class="main-amozesh">
+          <h2>پرمخاطب‌ترین آموزش‌های زبان</h2>
+          <br>
+          <div class="tabs">
+            <div class="tab active" onclick="showCategory('all', this)">همه</div>
+            <div class="tab" onclick="showCategory('english', this)">زبان انگلیسی</div>
+            <div class="tab" onclick="showCategory('german', this)">زبان المانی</div>
+            <div class="tab" onclick="showCategory('ielts', this)">ایتلس</div>
+          </div>
+
+          <div class="course-slider-wrapper">
+            <button class="nav-btn nav-left" onclick="scrollSlider(-1)">&#x2039;</button>
+            <div class="course-slider" id="slider">
+                <div class="course-card" data-category="english">
+
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image28-amozesh-english.svg'%}">
+                            <h4>آموزش گرامر مقدماتی زبان انگلیسی – سطح A1 + گواهینامه</h4>
+                            <h6>
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                زهرا دلاوری
+                            </h6>
+                            <h6>
+                                <i class="fa-solid fa-clock"></i>
+                                3 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                                قیمت : 79000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>80000</del>
+                        </a>
+                    </div>
+
+                </div>
+
+
+                <div class="course-card" data-category="german">
+
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image31-amozesh-german.svg'%}">
+                            <h4>آموزش زبان آلمانی – سطح مقدماتی تا متوسط A1 و A2 و B1</h4>
+                            <h6>
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                سید پیمان احمدی شیخ شبانی
+                            </h6>
+                            <h6>
+                                <i class="fa-solid fa-clock"></i>
+                                18 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                                قیمت : 89000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>98000</del>
+                        </a>
+                    </div>
+
+                </div>
+
+
+                <div class="course-card" data-category="ielts">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image34-amozesh-ielts.svg'%}">
+                            <h4>آموزش اسپیکینگ آیلتس – IELTS Speaking</h4>
+                            <br>
+                            <h6>
+                              <i class="fas fa-chalkboard-teacher"></i>
+                              امیر سپه وند
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              3 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 299000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>300000</del>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="course-card" data-category="german">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image32-amozesh-german.svg'%}">
+                            <h4>آموزش هوش مصنوعی GPT برای یادگیری زبان آلمانی + پروژه‌های کاربردی</h4>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                              مهرداد رجبعلی فردی
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              2 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 69000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>70000</del>
+            
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="course-card" data-category="english">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image29-amozesh-english.svg'%}">
+                            <h4>آموزش گرامر مقدماتی زبان انگلیسی – سطح A2 + گواهینامه</h4>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                                زهرا دلاور
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              3 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 169000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>175000</del>
+            
+                        </a>
+                    </div>
+                </div>
+                <div class="course-card" data-category="ielts">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image35-amozesh-ielts.svg'%}">
+                            <h4>آموزش اسپیکینگ آیلتس با IELTS Assistant + بررسی نمونه سوالات</h4>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                                شکوه علی پور
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              2 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 94000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>95000</del>
+            
+                        </a>
+                    </div>
+                </div>
+                <div class="course-card" data-category="english">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image30-amozesh-english.svg'%}">
+                            <h4>آموزش تقویت مکالمه زبان انگلیسی – گرامر کاربردی + گواهینامه</h4>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                                مجید حاتمی
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              4 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 250000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>255000</del>
+            
+                        </a>
+                    </div>
+                </div>
+                <div class="course-card" data-category="german">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image33-amozesh-german.svg'%}">
+                            <h4>آموزش گرامر اسم در زبان آلمانی – ۲۹ درس کاربردی</h4>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                                مهرداد رجبعلی فردی
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              6 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 312000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>315000</del>
+            
+                        </a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="amozesh">
+          <div class="main-amozesh">
+          <h2>پرمخاطب‌ترین آموزش‌های مهندسی</h2>
+          <br>
+          <div class="tabs">
+            <div class="tab active" onclick="showCategory('all', this)">همه</div>
+            <div class="tab" onclick="showCategory('omran', this)">مهندسی عمران</div>
+            <div class="tab" onclick="showCategory('kamp', this)">مهندسی کامپیوتر</div>
+            <div class="tab" onclick="showCategory('bargh', this)">مهندسی برق</div>
+          </div>
+
+          <div class="course-slider-wrapper">
+            <button class="nav-btn nav-left" onclick="scrollSlider(-1)">&#x2039;</button>
+            <div class="course-slider" id="slider">
+                <div class="course-card" data-category="omran">
+
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image28-amozesh-english.svg'%}">
+                            <h4>آموزش گرامر مقدماتی زبان انگلیسی – سطح A1 + گواهینامه</h4>
+                            <h6>
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                زهرا دلاوری
+                            </h6>
+                            <h6>
+                                <i class="fa-solid fa-clock"></i>
+                                3 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                                قیمت : 79000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>80000</del>
+                        </a>
+                    </div>
+
+                </div>
+
+
+                <div class="course-card" data-category="kamp">
+
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image36-amozesh-kamp.svg'%}">
+                            <h4>اموزش شناخت  انواع هک و روش های مقابله با ان</h4>
+                            <br>
+                            <h6>
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                مجتبی شادریان
+                            </h6>
+                            <h6>
+                                <i class="fa-solid fa-clock"></i>
+                                6 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                                قیمت : 89000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>90000</del>
+                        </a>
+                    </div>
+
+                </div>
+
+
+                <div class="course-card" data-category="kamp">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image37-amozesh-kamp.svg'%}">
+                            <h4>اموزش عیب یابی کامپیوتر و لپ تاپ و روش حل ان + گواهینامه</h4>
+                            <h6>
+                              <i class="fas fa-chalkboard-teacher"></i>
+                              کامبیز ذوقی خوی
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              3 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 789000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>790000</del>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="course-card" data-category="bargh">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image40-amozesh-bargh.svg'%}">
+                            <h4>اموزش مبانی برق1</h4>
+                            <br>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                              امید زندی
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              14 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 230000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>233000</del>
+            
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="course-card" data-category="kamp">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image38-amozesh-kamp.svg'%}">
+                            <h4>اموزش کار با دوربین های مدار بسته - مقدماتی + گواهینامه</h4>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                                سلمان حاجی اقاسی 
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              8 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 89000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>90000</del>
+            
+                        </a>
+                    </div>
+                </div>
+                <div class="course-card" data-category="bargh">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image41-amozesh-bargh.svg'%}">
+                            <h4>آموزش طراحی نیروگاه خورشیدی فتوولتائیک با پی وی سیست PVsyst</h4>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                                رضا نصرالهی
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              3 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 112000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>115000</del>
+            
+                        </a>
+                    </div>
+                </div>
+                <div class="course-card" data-category="omran">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image42-amozesh-omran.svg'%}">
+                            <h4>اموزش استاتیک - جامع و کاربردی</h4>
+                            <br>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                                کوروش عذت الهی 5 ساعت
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              5 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 279000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>280000</del>
+            
+                        </a>
+                    </div>
+                </div>
+                <div class="course-card" data-category="kamp">
+                    <div  class="amozesh-ha">
+                        <a href="#">
+                            <img src="{% static 'image/image39-amozesh-kamp.svg'%}">
+                            <h4>آموزش طراحی الگوریتم – جامع و با مفاهیم کلیدی</h4>
+                            <br>
+                            <h6>
+                            <i class="fas fa-chalkboard-teacher"></i>
+                               فرشید شیرافکن
+                            </h6>
+                            <h6>
+                              <i class="fa-solid fa-clock"></i>
+                              15 ساعت
+                            </h6>
+                            <br>
+                            <h5>
+                              قیمت : 450000 تومان
+                            </h5>
+                            <span>شگفتی</span>
+                            <del>455000</del>
+            
+                        </a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="div-main">
+        <div class="tich">
+            <div class="text">
+                <h1>تدریس در فرادرس</h1>
+                <h3>
+                    برای همکاری آموزشی، تدریس و ارایه آموزش در فرادرس و پیوستن به آن
+                    <br>
+                    به عنوان عضو هیات علمی، به لینک زیر مراجعه کنید.
+                </h3>
+                <a href="mini-faradars4(amozesh ha).html">
+                    <button>تدریس در فرادرس</button>
+                </a>
+            </div>
+            <img src="{% static 'image/image-tadris-in-faradars.svg'%}" alt="تدریس در فرادرس">
+        </div>
+      </div>
+    
+
+
+
+
+
+    </div>
+
+    <script>
+        //بنر تبلیغاتی تایمر دار بالای صفحه
+        function closeBanner() {
+            document.getElementById('promo-banner').style.display = 'none';
+        }
+
+        let countdownTime = new Date().getTime() + (1 * 60 * 60 * 1000);
+
+        let countdownElement = document.getElementById("countdown");
+
+        let countdownInterval = setInterval(function () {
+            let now = new Date().getTime();
+            let distance = countdownTime - now;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownElement.innerHTML = "زمان به پایان رسید!";
+                return;
+            }
+
+            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = `${hours} ساعت ${minutes} دقیقه ${seconds} ثانیه`;
+        }, 1000);
+
+
+
+
+        //منو دسته بندی
+            const dasteBandy = document.querySelector('.daste-bandy');
+            const menuPanel = document.getElementById('menuPanel');
+            const overlay = document.getElementById('overlay');
+
+            // تابع برای باز کردن منو
+            function openMenu() {
+                overlay.style.display = 'block';
+                menuPanel.style.display = 'block';
+
+                // یه تایم کوتاه بدیم تا مرورگر زمان داشته باشه کلاس‌هارو بخونه
+                setTimeout(() => {
+                    overlay.classList.add('show');
+                    menuPanel.classList.add('show');
+                }, 10);
+            }
+
+            function closeMenu() {
+                overlay.classList.remove('show');
+                menuPanel.classList.remove('show');
+
+                // بعد از تموم شدن انیمیشن opacity، display رو دوباره none کن
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    menuPanel.style.display = 'none';
+                }, 500); // به اندازه طولانی‌ترین transition (اینجا overlay که ۰.۵ ثانیه‌ست)
+            }
+
+
+    // وقتی موس میره روی "دسته‌بندی" یا منو
+    dasteBandy.addEventListener('mouseenter', openMenu);
+    menuPanel.addEventListener('mouseenter', openMenu);
+    let openTimeout, closeTimeout;
+
+// برای منو اصلی
+    dasteBandy.addEventListener('mouseenter', () => {
+        clearTimeout(closeTimeout); // جلوگیری از بستن ناگهانی
+        openTimeout = setTimeout(() => {
+            openMenu();
+        }, 100); // تاخیر کوتاه برای باز کردن
+    });
+
+    dasteBandy.addEventListener('mouseleave', () => {
+        closeTimeout = setTimeout(() => {
+            if (!menuPanel.matches(':click') && !submenu.matches(':click')) { //-------------------------------------------------
+                closeMenu();
+            }
+        }, 300); // زمان برای کاربر جهت ورود به منو
+    });
+
+    menuPanel.addEventListener('mouseenter', () => {
+        clearTimeout(closeTimeout);
+    });
+
+    menuPanel.addEventListener('mouseleave', () => {
+        closeTimeout = setTimeout(() => {
+            if (!dasteBandy.matches(':hover') && !submenu.matches(':hover')) {  //-------------------------------------------------
+                closeMenu();
+            }
+        }, 300);
+    });
+
+
+
+
+    // زیر منوی دسته بندی
+
+    const submenuItems = [
+        ["پایتون", "جاوااسکریپت", "C++ زبان","C زبان","C# زبان","CSS زبان","HTML کدنویسی","جنگو","مبانی برنامه نویسی","برنامه نویسی پیشرفته",],
+        ["فتوشاپ", "ایلستریتور", "فیگما","دوره۱"," دوره۲","طراحی","دیزاین","طلا کوب","فلز کاری","نقره کوب"],
+        ["آمار توصیفی", "1احتمال", "جبر خطی","ترکیبیات","ریاضی","مبانی علوم ریاضی","مبانی احتمال","مبانی جبر","انالیز ریاضی","انالیز عددی"],
+        ["مکانیک", "الکترومغناطیس", "ترمودینامیک","فیزیک1","فیزیک2","قوانین حرکت","قوانین سقوط","حرکت دایره ای","سرعت ثابت","پرتاب دایره ای"],
+        ["انگلیسی", "فرانسوی", "آلمانی","چینی","یونانی","کره ای","اذری","ترکی","قومیت ها","لحجه ها"],
+        ["پیش نیاز ها", "گراف", "کد ها","برنامه نویسی پویا","روش حریصانه","بهینه سازی الگوریتم های حریصانه","بهینه سازی الگوریتم های پویا","ماتریس 0و1","کد های حریصانه","کد های پویا"],
+        ["صف","پشته","درخت دودویی","درخت قرمز-مشکی","پرانتز گذاری","صف اولویت","کوله پشتی 0و1","لون اشتاین","map(نقشه راه)","درخت2 و 3"],
+        ["گیت های منطقی","عبارت های منطقی","جدول های کارنو","نیم جمع کننده","تمام جمع کننده","نیم تفریق کننده","تمام تفریق کننده","یک کری","حافظه","سنکرون ها"],
+        ["سیم های انتقال","حافظه cpu","حافظه رم","خنک کننده","مانیتور","اینرنت","کارت گرافیک","دکمه پاور","ریز پردازنده ها","cpu پردازنده"],
+        ["رشته ها","زبان ها","ماشین های DFA","ماشین های NFA","استیت شروع","استیت پایانی","ماشین هاش پشته ای","پوش شدن در پشته","پاپ شدن در پشته","پذیرش در انواع ماشین ها"]
+    ];
+
+    const lis = document.querySelectorAll('.menu-content li');
+    const submenu = document.querySelector('.menu-1-1');
+    const submenuList = document.getElementById('submenu-list');
+
+    let submenuCloseTimeout;
+
+    lis.forEach((li, index) => {
+        li.addEventListener('mouseenter', () => {
+            clearTimeout(submenuCloseTimeout);
+            submenuList.innerHTML = "";
+            submenuItems[index].forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                submenuList.appendChild(li);
+            });
+            submenu.style.display = 'block';
+        });
+
+        li.addEventListener('mouseleave', () => {
+            submenuCloseTimeout = setTimeout(() => {
+                if (!submenu.matches(':click')) { //-------------------------------------------------------------
+                    submenu.style.display = 'none';
+                }
+            }, 300);
+        });
+    });
+
+    submenu.addEventListener('mouseenter', () => {
+        clearTimeout(submenuCloseTimeout);
+    });
+
+    submenu.addEventListener('mouseleave', () => {
+        submenuCloseTimeout = setTimeout(() => {
+        submenu.style.display = 'none';
+        }, 300);
+    });
+
+
+        submenu.addEventListener('mouseleave', () => {
+        submenu.style.display = 'none';
+    });
+
+        submenu.addEventListener('mouseenter', () => {
+        submenu.style.display = 'block';
+    });
+
+
+
+
+
+    //بخشه جستجو هایه پرطرفدار
+    const searchInput = document.querySelector('.search1');
+    const popularSearches = document.getElementById('popularSearches');
+
+    searchInput.addEventListener('focus', () => {
+        popularSearches.style.display = 'block';
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!document.querySelector('.search-container').contains(e.target)) {
+            popularSearches.style.display = 'none';
+        }
+    });
+
+    function fillSearch(text) {
+        searchInput.value = text;
+        popularSearches.style.display = 'none';
+    }
+
+      //بخش بموزش های مهندسی
+        function showCategory(category, el) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+
+      const cards = document.querySelectorAll('.course-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function scrollSlider(direction) {
+      const slider = document.getElementById('slider');
+      const scrollAmount = 270;
+      slider.scrollLeft += direction * scrollAmount;
+    }
+    
+   
+  function showCategory(category, el) {
+    // تب‌ها فقط در بخش مربوطه غیر فعال بشن
+    const tabContainer = el.parentElement;
+    tabContainer.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+
+    // پیدا کردن course-slider مربوط به همین تب
+    const sliderWrapper = tabContainer.nextElementSibling;
+    const cards = sliderWrapper.querySelectorAll('.course-card');
+
+    // فیلتر کردن فقط کارت‌های همین اسلایدر
+    cards.forEach(card => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function scrollSlider(direction) {
+    // چون id="slider" تکراریه، فقط اولین اسلایدر رو می‌گیره!
+    // باید اینو هم اصلاح کنیم تا مستقل بشه
+
+    const buttons = document.querySelectorAll('.nav-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', function () {
+        const slider = this.parentElement.querySelector('.course-slider');
+        const scrollAmount = 270;
+        slider.scrollLeft += direction * scrollAmount;
+      });
+    });
+  }
+
+  // اصلاح اسکرول اولیه فقط برای دکمه اول (بجای تکرار id)
+  // بهتره دکمه‌های اسکرول رو هم از تکرار id خارج کنیم یا کلاس استفاده کنیم
+
+
+    </script>
+</body>
+</html>

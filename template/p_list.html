@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{% block title %} {{prudacts.p_name}} {% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+    <h1>all prodacts</h1>
+    <ul>
+        {% for prudacts in p_list %}
+            <div class="p_entery">
+                <h2><a href="{% url 'p_detale' prudacts.id %}">{{ prudacts.p_name }}</a></h2>
+          </div>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>form-logic</title>
+        <style>
+            .main{
+                background: linear-gradient(to top ,rgb(253, 253, 253),rgb(219, 242, 252),rgb(195, 233, 250),rgb(127, 212, 248),
+                rgb(45, 184, 243));
+                margin-top: 0;
+                padding-top: 10%;
+            }
+            .form-l{
+                box-shadow: 2px 2px 6px rgba(39, 39, 39, 0.815);
+                padding: 10px;
+                padding-left: 30px;
+                width: 35%;
+                margin-left: 30%;
+                font-size: 20px;
+                background-color: aliceblue;
+                direction: rtl;
+            }
+            .form-l input{
+                width: 65%;
+                height: 25px;
+            }
+            #email{
+                width: 65.8%;
+            }
+            .send{
+                background-color: green;
+                width: 20%;
+                font-size: 20px;
+            }
+            .send:hover{
+                background-color: rgb(1, 80, 1);
+            }
+            #password{
+                width: 65%;
+            }
+            #phone{
+                width: 64.5%;
+            }
+            @media (max-width: 1024px) {
+                .form-l{
+                    width: 60%;
+                    font-size: 20px;
+                    margin-left: 20%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+    <div class="main">
+        <form class="form-l">
+            <h3>اطلاعات ثبت نام : </h3>
+            <br>
+            &nbsp; &nbsp; &nbsp; نام : &nbsp; &nbsp; &nbsp; &nbsp;<input type="text" id="fname">
+            <br>
+            <br>
+            نام خانوادگی : <input type="text" id="lname">
+            <br>
+            <br>
+            &nbsp; &nbsp; ایمیل : &nbsp; &nbsp; &nbsp;<input type="email" required size="35" id="email">
+            <br>
+            <br>
+            رمز عبور : &nbsp; &nbsp;<input type="password" id="password">
+            <br>
+            <br>
+            تلفن همراه : &nbsp; &nbsp;<input type="number" required size="11" id="phone">
+            <br>
+            <br>
+            <button class="send">ارسال</button>
+            <br>
+            <br>
+        </form>
+    </div>
+        <script>
+
+        </script>
+    </body>
+</html>

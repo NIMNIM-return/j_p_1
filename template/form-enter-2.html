@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>فرم ورود کاربر</title>
+        <style>
+            /* استایل‌ها همون‌هایی هستن که خودت نوشتی */
+            /* ... (همه استایل‌های بالا بدون تغییر باقی می‌مونن) ... */
+                        .dis{
+                display: none;
+            }
+            .main{
+                background: linear-gradient(to top ,rgb(253, 253, 253),rgb(219, 242, 252),rgb(195, 233, 250),rgb(127, 212, 248),
+                rgb(45, 184, 243));
+                margin-top: 0;
+                padding-top: 10%;
+            }
+            .form-l{
+                box-shadow: 2px 2px 6px rgba(39, 39, 39, 0.815);
+                padding: 10px;
+                padding-left: 30px;
+                width: 35%;
+                margin-left: 30%;
+                font-size: 20px;
+                background-color: aliceblue;
+                direction: rtl;
+            }
+            .form-l input{
+                width: 65%;
+                height: 25px;
+            }
+            #email{
+                width: 65.8%;
+            }
+            .send{
+                background-color: green;
+                width: 20%;
+                font-size: 20px;
+                height: 40px;
+                margin-top: 20px;
+            }
+            .send:hover{
+                background-color: rgb(1, 80, 1);
+            }
+            #password{
+                width: 65%;
+            }
+            #phone{
+                width: 64.5%;
+            }
+            .er-sa{
+                display: flex;
+                font-size: 20px;
+                justify-content: space-between;
+            }
+            .er-sa a{
+                text-decoration: none;
+                color: rgb(26, 106, 197);
+            }
+            .fpass{
+                text-decoration: none;
+                color: rgb(26, 106, 197);
+            }
+            @media (max-width: 1024px) {
+                .form-l{
+                    width: 60%;
+                    font-size: 20px;
+                    margin-left: 20%;
+                }
+            }
+            .lname{
+                margin-bottom: 30px;
+                padding-bottom: 30px;
+            }
+            .ln{
+                display: flex;
+            }
+        </style>
+    </head>
+    <body>
+        {% load static %}
+        <div class="main">
+            <form method="post" enctype="multipart/form-data" class="form-l">
+                <h3>اطلاعات ورود:</h3>
+                <br>
+                {% csrf_token %}
+                
+                <br><br>
+                ایمیل:
+                <label for="email"></label>
+                {{ form.email }}
+                
+                <br><br>
+
+                پسورد:
+                <label for="password"></label>
+                {{ form.password }}
+                
+                <div class="er-sa">
+                    <p>حساب کاربری ندارید؟ <a href="">ثبت‌نام کنید</a></p>
+                    <button type="submit" class="send">ارسال</button>
+                </div>
+
+                <br>
+                <br>
+                <a class="fpass" href="">فراموشی رمز عبور</a>
+                <br>
+                <br>
+            </form>
+        </div>
+    </body>
+</html>

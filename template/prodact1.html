@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<ul>
+    {% for p in prodacts%}
+        <li>{{ p.1 }} - {{ p.2 }} - {{ p.3 }} - {{ p.4 }}</li>
+    {% endfor %}
+</ul>
+{% endblock content %}

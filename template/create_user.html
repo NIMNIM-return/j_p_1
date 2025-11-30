@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>فرم ثبت کاربر</title>
+</head>
+    <body>
+        <h2>ثبت‌نام کاربر</h2>
+        <form method="post">
+        {% csrf_token %}
+        
+        <p>نام: {{ form.first_name }}</p>
+        <p>نام خانوادگی: {{ form.last_name }}</p>
+        <p>رمزعبور: {{ form.password }}</p>
+        <p>ایمیل: {{ form.email }}</p>
+        <p>تلفن: {{ form.phone }}</p>
+        
+        <button type="submit">ثبت</button>
+    </form>
+</body>
+</html>
